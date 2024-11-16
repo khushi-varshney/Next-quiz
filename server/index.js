@@ -37,7 +37,7 @@ const userSchema = new mongoose.Schema({
   password: String,
 })
 
-const User =  mongoose.model('BPquiz', userSchema);
+const User =  mongoose.model('User', userSchema);
 
 //Routes
 app.post("/login", async(req, res) => {
