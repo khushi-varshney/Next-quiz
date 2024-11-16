@@ -40,7 +40,7 @@ const userSchema = new mongoose.Schema({
 const User =  mongoose.model('Users', userSchema);
 
 //Routes
-app.post("/login", async(req, res) => {
+app.post("/", async(req, res) => {
   const { email, password} = req.body
   User.find({email: email}).then((user)=>{
     if(user){
@@ -58,7 +58,7 @@ app.post("/login", async(req, res) => {
   });
 });
 
-app.post("/register", async(req, res) => {
+app.post("/signup", async(req, res) => {
   const { name, email, password } = req.body;
   User.findOne({ email }).then((user) => {
     if (user) {
