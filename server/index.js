@@ -37,7 +37,7 @@ const userSchema = new mongoose.Schema({
   password: String,
 })
 
-const User =  mongoose.model('User', userSchema);
+const User =  mongoose.model('Users', userSchema);
 
 //Routes
 app.post("/login", async(req, res) => {
