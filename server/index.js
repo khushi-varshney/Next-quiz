@@ -37,12 +37,12 @@ const userSchema = new mongoose.Schema({
   password: String,
 })
 
-const BPQuiz =  mongoose.model('BPQuiz', userSchema);
+const NextQuiz =  mongoose.model('NextQuiz', userSchema);
 
 //Routes
 app.post("/login", async(req, res) => {
   const { email, password} = req.body
-  BPQuiz.find({email: email}).then((user)=>{
+  NextQuiz.find({email: email}).then((user)=>{
     if(user){
       const isValidPassword = bcrypt.compareSync(password, user[0].password);
       if(isValidPassword){
@@ -51,23 +51,23 @@ app.post("/login", async(req, res) => {
         res.send({message : "Incorrect Password"})
       }
     }else{
-      res.send({message: "BPQuiz Not Registered"})
+      res.send({message: "NextQuiz Not Registered"})
     }
   }).catch((error)=>{
-    res.send({message: "BPQuiz Not Registered"});
+    res.send({message: "NextQuiz Not Registered"});
   });
 });
 
 app.post("/register", async(req, res) => {
   const { name, email, password } = req.body;
-  BPQuiz.findOne({ email }).then((user) => {
+  NextQuiz.findOne({ email }).then((user) => {
     if (user) {
-      // res.send({ message: "BPQuiz Already Registered"});
-      res.send({message: "BPQuiz Already Registered", user})
+      // res.send({ message: "NextQuiz Already Registered"});
+      res.send({message: "NextQuiz Already Registered", user})
     } else {
       const salt = bcrypt.genSaltSync(10);
       const hashedpassword = bcrypt.hashSync(password, salt);
-      const user = new BPQuiz({
+      const user = new NextQuiz({
         name,
         email,
         password:hashedpassword,
