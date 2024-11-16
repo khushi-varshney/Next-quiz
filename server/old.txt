@@ -1,7 +1,8 @@
 import express from "express";
-import cors from "cors";
+import bcrypt from "bcrypt"
 import mongoose from "mongoose";
 import * as dotenv from "dotenv"; 
+import cors from "cors";
 
 const app = express();
 app.use(express.json());
@@ -23,7 +24,7 @@ app.use((req, res, next) => {
 })
 
 dotenv.config();
-const DB=process.env.MONGODB_URI;
+const DB="mongodb+srv://user:koHKbEuxFTqC6OSk@cluster0.4lsix.mongodb.net/mernstack?retryWrites=true&w=majority&appName=Cluster0";
 mongoose.connect(DB, {
     useUnifiedTopology: true,
     useNewUrlParser: true,
@@ -37,16 +38,16 @@ const userSchema = new mongoose.Schema({
   password: String,
 })
 
-const User =  mongoose.model('User', userSchema);
+const Quiz =  mongoose.model('BPQuiz', userSchema);
 
 //Routes
 app.post("/login", async(req, res) => {
   const { email, password} = req.body
-  User.find({email: email}).then((user)=>{
+  Quiz.find({email: email}).then((user)=>{
     if(user){
-      const isValidPassword = bcrypt.compareSync(password, user[0].password);
-      if(isValidPassword){
-      res.send({message: "Login Successfully",user})
+        const isValidPassword = bcrypt.compareSync(password, user[0].password);
+        if(isValidPassword){
+        res.send({message: "Login Successfully",user})
       }else{
         res.send({message : "Incorrect Password"})
       }
@@ -58,20 +59,19 @@ app.post("/login", async(req, res) => {
   });
 });
 
-app.post("/register", async(req, res) => {
+app.post("/signup", async(req, res) => {
   const { name, email, password } = req.body;
-  User.findOne({ email }).then((user) => {
+  Quiz.findOne({ email }).then((user) => {
     if (user) {
-      // res.send({ message: "User Already Registered"});
       res.send({message: "User Already Registered", user})
     } else {
       const salt = bcrypt.genSaltSync(10);
       const hashedpassword = bcrypt.hashSync(password, salt);
-      const user = new User({
+      const user = new Quiz({
         name,
         email,
-        password:hashedpassword,
-      })
+        password: hashedpassword,
+      })    
       user.save().then(()=>{
           res.send({ message: "Successfully Registered"});
         }
