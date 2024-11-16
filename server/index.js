@@ -2,12 +2,19 @@ import express from "express";
 import bcrypt from "bcrypt"
 import mongoose from "mongoose";
 import * as dotenv from "dotenv"; 
-
+import cors from "cors";
 
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded());
 
+// app.use(cors());
+// app.use(cors({
+//   origin: ['https://blackpink-mu.vercel.app/', 'http://localhost:5173/'],
+//   methods: ['GET', 'POST', 'PUT', 'DELETE'],
+//   allowedHeaders: ['Content-Type', 'Authorization'],
+//   credentials: true
+// }))
 
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
