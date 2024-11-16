@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
 import * as dotenv from "dotenv"; 
+import bcrypt from "bcrypt";
 
 const app = express();
 app.use(express.json());
@@ -37,12 +38,12 @@ const userSchema = new mongoose.Schema({
   password: String,
 })
 
-const User =  mongoose.model('User', userSchema);
+const BPQuiz =  mongoose.model('BPQuiz', userSchema);
 
 //Routes
 app.post("/login", async(req, res) => {
   const { email, password} = req.body
-  User.find({email: email}).then((user)=>{
+  BPQuiz.find({email: email}).then((user)=>{
     if(user){
       const isValidPassword = bcrypt.compareSync(password, user[0].password);
       if(isValidPassword){
@@ -51,23 +52,23 @@ app.post("/login", async(req, res) => {
         res.send({message : "Incorrect Password"})
       }
     }else{
-      res.send({message: "User Not Registered"})
+      res.send({message: "BPQuiz Not Registered"})
     }
   }).catch((error)=>{
-    res.send({message: "User Not Registered"});
+    res.send({message: "BPQuiz Not Registered"});
   });
 });
 
 app.post("/register", async(req, res) => {
   const { name, email, password } = req.body;
-  User.findOne({ email }).then((user) => {
+  BPQuiz.findOne({ email }).then((user) => {
     if (user) {
-      // res.send({ message: "User Already Registered"});
-      res.send({message: "User Already Registered", user})
+      // res.send({ message: "BPQuiz Already Registered"});
+      res.send({message: "BPQuiz Already Registered", user})
     } else {
       const salt = bcrypt.genSaltSync(10);
       const hashedpassword = bcrypt.hashSync(password, salt);
-      const user = new User({
+      const user = new BPQuiz({
         name,
         email,
         password:hashedpassword,
