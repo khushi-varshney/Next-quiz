@@ -10,8 +10,5 @@
         "Access-Control-Allow-Methods": "GET,POST,PUT,DELETE"
       }
     }
-  ],
-  "env":{
-    "MONGODB_URI":"@MONGODB_URI"
-  }
+  ]
 }
