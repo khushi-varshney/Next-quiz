@@ -40,7 +40,7 @@ const userSchema = new mongoose.Schema({
 const User =  mongoose.model('Users', userSchema);
 
 //Routes
-app.post("/", async(req, res) => {
+app.post("/login", async(req, res) => {
   const { email, password} = req.body
   User.find({email: email}).then((user)=>{
     if(user){
