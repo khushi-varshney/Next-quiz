@@ -8,19 +8,19 @@ app.use(express.json());
 app.use(express.urlencoded());
 
 
-app.use(cors({
-  origin: ['https://next-quiz-bice.vercel.app/'],
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],
-  allowedHeaders: ['Content-Type', 'Authorization'],
-  credentials: false
-}))
+// app.use(cors({
+//   origin: ['https://next-quiz-bice.vercel.app/'],
+//   methods: ['GET', 'POST', 'PUT', 'DELETE'],
+//   allowedHeaders: ['Content-Type', 'Authorization'],
+//   credentials: false
+// }))
 
-// app.use((req, res, next) => {
-//   res.setHeader("Access-Control-Allow-Origin", "*");
-//   res.setHeader("Access-Control-Allow-Methods", "POST, GET, PUT");
-//   res.setHeader("Access-Control-Allow-Headers", "Content-Type");
-//   next();
-// })
+app.use((req, res, next) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Methods", "POST, GET, PUT, OPTIONS");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type, application/json, authorization");
+  next();
+})
 
 dotenv.config();
 const DB=process.env.MONGODB_URI;
