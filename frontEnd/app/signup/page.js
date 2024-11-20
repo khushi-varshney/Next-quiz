@@ -25,7 +25,7 @@ const page = ({setLoginRegister}) => {
     })
   }
 
-  axios.defaults.withCredentials=true;
+  axios.defaults.withCredentials=false;
 
   const register= async()=>{
     const { name, email, password, reEnterPassword } = user
