@@ -25,6 +25,8 @@ const page = ({setLoginRegister}) => {
     })
   }
 
+  axios.defaults.withCredentials=true;
+
   const register= async()=>{
     const { name, email, password, reEnterPassword } = user
     if( name && email && password && (password == reEnterPassword) && email.includes("@")){

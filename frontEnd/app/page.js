@@ -25,6 +25,8 @@ const page = () => {
     })
   }
 
+  axios.defaults.withCredentials=true;
+
   const login = async()=>{
     const {email} = user;
     if(email.includes("@")){
