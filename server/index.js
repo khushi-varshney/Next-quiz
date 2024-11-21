@@ -23,7 +23,7 @@ app.use(cors())
 // })
 
 dotenv.config();
-const DB=process.env.MONGODB_URI;
+const DB="mongodb+srv://user:koHKbEuxFTqC6OSk@cluster0.4lsix.mongodb.net/mernstack?retryWrites=true&w=majority&appName=Cluster0";
 mongoose.connect(DB, {
     useUnifiedTopology: true,
     useNewUrlParser: true,
