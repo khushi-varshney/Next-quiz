@@ -60,18 +60,17 @@ app.post("/login", async(req, res) => {
 
 app.post("/signup", async(req, res) => {
   const { name, email, password } = req.body;
-  User.findOne({ email }).then((user) => {
+  Quiz.findOne({ email }).then((user) => {
     if (user) {
-      // res.send({ message: "User Already Registered"});
       res.send({message: "User Already Registered", user})
     } else {
       const salt = bcrypt.genSaltSync(10);
       const hashedpassword = bcrypt.hashSync(password, salt);
-      const user = new User({
+      const user = new Quiz({
         name,
         email,
-        password:hashedpassword,
-      })
+        password: hashedpassword,
+      })    
       user.save().then(()=>{
           res.send({ message: "Successfully Registered"});
         }
