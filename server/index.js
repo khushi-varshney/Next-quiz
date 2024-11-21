@@ -58,7 +58,8 @@ app.post("/login", async(req, res) => {
   });
 });
 
-app.post("/sign", async(req, res) => {
+app.post("/register", async(req, res) => {
+  res.json("register")
   const { name, email, password } = req.body;
   User.findOne({ email }).then((user) => {
     if (user) {
