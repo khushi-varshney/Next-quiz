@@ -83,7 +83,7 @@ app.post("/signup", async(req, res) => {
 });
 
 app.get("/", (req,res)=>{
-  res.json("Hello")
+  res.json("Hello Server From Next Quiz")
 })
 
 app.listen(9002, () => {
