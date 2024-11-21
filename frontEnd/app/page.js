@@ -30,8 +30,8 @@ const page = () => {
   const login = async()=>{
     const {email} = user;
     if(email.includes("@")){
-      // axios.post("http://localhost:9002/login", user)
-    axios.post("https://next-quiz-server.vercel.app/login",user)
+      axios.post("http://localhost:9002/login", user)
+    // axios.post("https://next-quiz-server.vercel.app/login",user)
     .then(res => {
       toast(res.data.message, {
         position: "top-right",
