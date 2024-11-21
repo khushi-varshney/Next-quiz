@@ -58,15 +58,15 @@ app.post("/login", async(req, res) => {
   });
 });
 
-app.post("/signup", async(req, res) => {
+app.post("/", async(req, res) => {
   const { name, email, password } = req.body;
-  Quiz.findOne({ email }).then((user) => {
+  User.findOne({ email }).then((user) => {
     if (user) {
       res.send({message: "User Already Registered", user})
     } else {
       const salt = bcrypt.genSaltSync(10);
       const hashedpassword = bcrypt.hashSync(password, salt);
-      const user = new Quiz({
+      const user = new User({
         name,
         email,
         password: hashedpassword,
@@ -82,7 +82,7 @@ app.post("/signup", async(req, res) => {
 });
 
 app.get("/", (req,res)=>{
-  res.json("Hello Server From Next Quiz")
+  res.json("Hello Server From Next User")
 })
 
 app.listen(9002, () => {
