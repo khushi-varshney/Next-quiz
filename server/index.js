@@ -23,7 +23,7 @@ app.use((req, res, next) => {
 })
 
 dotenv.config();
-const DB="mongodb+srv://user:koHKbEuxFTqC6OSk@cluster0.4lsix.mongodb.net/mernstack?retryWrites=true&w=majority&appName=Cluster0";
+const DB="mongodb+srv://clients:koHKbEuxFTqC6OSk@cluster0.4lsix.mongodb.net/mernstack?retryWrites=true&w=majority&appName=Cluster0";
 mongoose.connect(DB, {
     useUnifiedTopology: true,
     useNewUrlParser: true,
@@ -42,11 +42,11 @@ const Quiz =  mongoose.model('quizes', userSchema);
 //Routes
 app.post("/login", async(req, res) => {
   const { email, password} = req.body
-  Quiz.find({email: email}).then((user)=>{
-    if(user){
-      const isValidPassword = true;
+  Quiz.find({email: email}).then((clients)=>{
+    if(clients){
+      const isValidPassword = bcrypt.compareSync(password, clients[0].password);
       if(isValidPassword){
-      res.send({message: "Login Successfully",user})
+      res.send({message: "Login Successfully",clients})
       }else{
         res.send({message : "Incorrect Password"})
       }
@@ -61,18 +61,18 @@ app.post("/login", async(req, res) => {
 
 app.post("/signup", async(req, res) => {
   const { name, email, password } = req.body;
-  Quiz.findOne({ email:email }).then((user) => {
-    if (user) {
-      res.send({message: "User Already Registered", user})
+  Quiz.findOne({ email:email }).then((clients) => {
+    if (clients) {
+      res.send({message: "User Already Registered", clients})
     } else {
       const salt = bcrypt.genSaltSync(10);
       const hashedpassword = bcrypt.hashSync(password, salt);
-      const user = new Quiz({
+      const clients = new Quiz({
         name,
         email,
         password: hashedpassword,
       })    
-      user.save().then(()=>{
+      clients.save().then(()=>{
           res.send({ message: "Successfully Registered"});
         }
       );
