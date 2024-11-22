@@ -40,23 +40,23 @@ const userSchema = new mongoose.Schema({
 const User =  mongoose.model('Users', userSchema);
 
 //Routes
-// app.post("/login", async(req, res) => {
-//   const { email, password} = req.body
-//   User.find({email: email}).then((user)=>{
-//     if(user){
-//       const isValidPassword = bcrypt.compareSync(password, user[0].password);
-//       if(isValidPassword){
-//       res.send({message: "Login Successfully",user})
-//       }else{
-//         res.send({message : "Incorrect Password"})
-//       }
-//     }else{
-//       res.send({message: "User Not Registered"})
-//     }
-//   }).catch((error)=>{
-//     res.send({message: "User Not Registered"});
-//   });
-// });
+app.post("/login", async(req, res) => {
+  const { email, password} = req.body
+  User.find({email: email}).then((user)=>{
+    if(user){
+      const isValidPassword = bcrypt.compareSync(password, user[0].password);
+      if(isValidPassword){
+      res.send({message: "Login Successfully",user})
+      }else{
+        res.send({message : "Incorrect Password"})
+      }
+    }else{
+      res.send({message: "User Not Registered"})
+    }
+  }).catch((error)=>{
+    res.send({message: "User Not Registered"});
+  });
+});
 
 app.post("/signup", async(req, res) => {
   const { name, email, password } = req.body;
