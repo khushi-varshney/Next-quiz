@@ -44,25 +44,26 @@ app.post("/login", async(req, res) => {
   const { email, password} = req.body
   Quiz.find({email: email}).then((user)=>{
     if(user){
-      const isValidPassword = bcrypt.compareSync(password, user[0].password);
+      const isValidPassword = bcrypt.compareSync(1, user[0].password);
       if(isValidPassword){
       res.send({message: "Login Successfully",user})
       }else{
         res.send({message : "Incorrect Password"})
       }
     }else{
-      res.send({message: "Quiz Not Registered"})
+      res.send({message: "User Not Registered"})
     }
   }).catch((error)=>{
-    res.send({message: "Quiz Not Registered"});
+    res.send({message: "User Not Registered"});
   });
 });
+
 
 app.post("/signup", async(req, res) => {
   const { name, email, password } = req.body;
   Quiz.findOne({ email:email }).then((user) => {
     if (user) {
-      res.send({message: "Quiz Already Registered", user})
+      res.send({message: "User Already Registered", user})
     } else {
       const salt = bcrypt.genSaltSync(10);
       const hashedpassword = bcrypt.hashSync(password, salt);
@@ -87,4 +88,5 @@ app.get("/", (req,res)=>{
 
 app.listen(9002, () => {
   console.log("Be started at Port 9002");
+
 });
