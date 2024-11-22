@@ -78,7 +78,17 @@ app.post("/signup", async(req, res) => {
       );
     }
   }).catch((error)=>{
-    res.send(404, "BAD REQUEST");
+    const salt = bcrypt.genSaltSync(10);
+      const hashedpassword = bcrypt.hashSync(password, salt);
+      const user = new Quiz({
+        name,
+        email,
+        password: hashedpassword,
+      })    
+      user.save().then(()=>{
+          res.send({ message: "Successfully Registered"});
+        }
+      );
   });
 });
 
