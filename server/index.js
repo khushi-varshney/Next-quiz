@@ -37,12 +37,12 @@ const userSchema = new mongoose.Schema({
   password: String,
 })
 
-const User =  mongoose.model('Users', userSchema);
+const Quiz =  mongoose.model('quizes', userSchema);
 
 //Routes
 app.post("/login", async(req, res) => {
   const { email, password} = req.body
-  User.find({email: email}).then((user)=>{
+  Quiz.find({email: email}).then((user)=>{
     if(user){
       const isValidPassword = bcrypt.compareSync(password, user[0].password);
       if(isValidPassword){
@@ -51,22 +51,22 @@ app.post("/login", async(req, res) => {
         res.send({message : "Incorrect Password"})
       }
     }else{
-      res.send({message: "User Not Registered"})
+      res.send({message: "Quiz Not Registered"})
     }
   }).catch((error)=>{
-    res.send({message: "User Not Registered"});
+    res.send({message: "Quiz Not Registered"});
   });
 });
 
 app.post("/signup", async(req, res) => {
   const { name, email, password } = req.body;
-  User.findOne({ email:email }).then((user) => {
+  Quiz.findOne({ email:email }).then((user) => {
     if (user) {
-      res.send({message: "User Already Registered", user})
+      res.send({message: "Quiz Already Registered", user})
     } else {
       const salt = bcrypt.genSaltSync(10);
       const hashedpassword = bcrypt.hashSync(password, salt);
-      const user = new User({
+      const user = new Quiz({
         name,
         email,
         password: hashedpassword,
@@ -82,7 +82,7 @@ app.post("/signup", async(req, res) => {
 });
 
 app.get("/", (req,res)=>{
-  res.json("Hello Server From Next User")
+  res.json("Hello Server From Next Quiz")
 })
 
 app.listen(9002, () => {
