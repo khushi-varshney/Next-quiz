@@ -3,7 +3,6 @@ import cors from "cors";
 import mongoose from "mongoose";
 import * as dotenv from "dotenv"; 
 
-
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded());
