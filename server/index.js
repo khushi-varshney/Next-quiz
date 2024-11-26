@@ -80,12 +80,12 @@ app.post("/signup", async(req, res) => {
     if (user) {
       res.send({message: "User Already Registered", user})
     } else {
-      const salt = bcrypt.genSaltSync(10);
-      const hashedpassword = bcrypt.hashSync(password, salt);
+      // const salt = bcrypt.genSaltSync(10);
+      // const hashedpassword = bcrypt.hashSync(password, salt);
       const user = new Quiz({
         name,
         email,
-        password: hashedpassword,
+        password:,
       })    
       user.save().then(()=>{
           res.send({ message: "Successfully Registered"});
