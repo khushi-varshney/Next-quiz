@@ -31,7 +31,8 @@ const page = ({setLoginRegister}) => {
     const { name, email, password, reEnterPassword } = user
     if( name && email && password && (password == reEnterPassword) && email.includes("@")){
       // axios.post("http://localhost:9002/signup", user)
-      axios.post("https://next-quiz-server.vercel.app/signup", user)
+      // axios.post("https://next-quiz-server.vercel.app/signup", user)
+      axios.post("https://blackpink-backend.vercel.app/register", user)
       .then(res =>{
         toast(res.data.message, {
         position: "top-right",
