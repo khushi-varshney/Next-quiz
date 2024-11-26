@@ -7,23 +7,6 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded());
 
-// app.use(cors({
-//   origin: '*',
-//   allowedHeaders: ["Content-Type", "Authorization"]
-// }));
-
-// app.options('*', cors())
-
-
-// app.all('', function(req, res, next) {
-//   res.header("Access-Control-Allow-Origin", "*");
-//   res.header('Access-Control-Allow-Methods', 'PUT, GET, POST, DELETE, OPTIONS');
-//   res.header('Access-Control-Allow-Headers', "Origin, X-Requested-With, Content-Type, Accept, Authorization");
-//   next();
-// });
-
-
-
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Credentials', true)
   res.setHeader('Access-Control-Allow-Origin', '*')
@@ -58,8 +41,7 @@ app.post("/login", async(req, res) => {
   const { email, password} = req.body
   Quiz.find({email: email}).then((user)=>{
     if(user){
-      // const isValidPassword = bcrypt.compareSync(password, user[0].password);
-      const isValidPassword = password===user[0].password ? true : false;
+      const isValidPassword = bcrypt.compareSync(password, user[0].password);
       if(isValidPassword){
       res.send({message: "Login Successfully",user})
       }else{
@@ -80,12 +62,12 @@ app.post("/signup", async(req, res) => {
     if (user) {
       res.send({message: "User Already Registered", user})
     } else {
-      // const salt = bcrypt.genSaltSync(10);
-      // const hashedpassword = bcrypt.hashSync(password, salt);
+      const salt = bcrypt.genSaltSync(10);
+      const hashedpassword = bcrypt.hashSync(password, salt);
       const user = new Quiz({
         name,
         email,
-        password
+        password: hashedpassword,
       })    
       user.save().then(()=>{
           res.send({ message: "Successfully Registered"});
