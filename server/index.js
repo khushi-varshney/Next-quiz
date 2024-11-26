@@ -7,20 +7,20 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded());
 
-app.use(cors({
-  origin: '*',
-  allowedHeaders: ["Content-Type", "Authorization"]
-}));
+// app.use(cors({
+//   origin: '*',
+//   allowedHeaders: ["Content-Type", "Authorization"]
+// }));
 
-app.options('*', cors())
+// app.options('*', cors())
 
 
-app.all('', function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header('Access-Control-Allow-Methods', 'PUT, GET, POST, DELETE, OPTIONS');
-  res.header('Access-Control-Allow-Headers', "Origin, X-Requested-With, Content-Type, Accept, Authorization");
-  next();
-});
+// app.all('', function(req, res, next) {
+//   res.header("Access-Control-Allow-Origin", "*");
+//   res.header('Access-Control-Allow-Methods', 'PUT, GET, POST, DELETE, OPTIONS');
+//   res.header('Access-Control-Allow-Headers', "Origin, X-Requested-With, Content-Type, Accept, Authorization");
+//   next();
+// });
 
 
 app.use((req, res, next) => {
