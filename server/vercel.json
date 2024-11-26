@@ -1,6 +1,7 @@
 {
   "version": 2,
   "builds": [{ "src": "*.js", "use": "@vercel/node" }],
+  "build" : {"env": {"BUILD_NATIVE_MODULES": "true"}},
   "routes": [
     {
       "src": "/(.*)",
