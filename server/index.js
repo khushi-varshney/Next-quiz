@@ -85,7 +85,7 @@ app.post("/signup", async(req, res) => {
       const user = new Quiz({
         name,
         email,
-        password:,
+        password
       })    
       user.save().then(()=>{
           res.send({ message: "Successfully Registered"});
