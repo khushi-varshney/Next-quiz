@@ -2,7 +2,6 @@ import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
 import * as dotenv from "dotenv"; 
-import bcrypt from "bcrypt"
 
 const app = express();
 app.use(express.json());
@@ -59,7 +58,8 @@ app.post("/login", async(req, res) => {
   const { email, password} = req.body
   Quiz.find({email: email}).then((user)=>{
     if(user){
-      const isValidPassword = bcrypt.compareSync(password, user[0].password);
+      // const isValidPassword = bcrypt.compareSync(password, user[0].password);
+      const isValidPassword = password===user[0].password ? true : false;
       if(isValidPassword){
       res.send({message: "Login Successfully",user})
       }else{
