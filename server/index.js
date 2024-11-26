@@ -2,7 +2,6 @@ import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
 import * as dotenv from "dotenv"; 
-import bcrypt from "bcrypt"
 
 const app = express();
 app.use(express.json());
@@ -35,6 +34,8 @@ app.use((req, res, next) => {
   )
   next();
 })
+
+import bcrypt from "bcrypt"
 
 dotenv.config();
 const DB="mongodb+srv://user:koHKbEuxFTqC6OSk@cluster0.4lsix.mongodb.net/mernstack?retryWrites=true&w=majority&appName=Cluster0";
