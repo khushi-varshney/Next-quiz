@@ -68,7 +68,7 @@ const page = ({setLoginRegister}) => {
   }
 
   return (
-    <div className=''>
+    <div className='overflow-x-hidden'>
       <div className="bg-blue-200 overflow-y-hidden flex justify-center items-center">
       <ToastContainer
         position="top-right"

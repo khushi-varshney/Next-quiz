@@ -64,7 +64,7 @@ const page = () => {
   }
 
   return (
-    <div className="bg-blue-200 h-[100vh] flex justify-center items-center">
+    <div className="bg-blue-200 h-[100vh] flex justify-center items-center overflow-hidden">
      <div className="flex justify-center text-center">
       <ToastContainer
         position="top-right"
