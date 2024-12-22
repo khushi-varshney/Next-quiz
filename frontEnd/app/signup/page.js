@@ -68,8 +68,8 @@ const page = ({setLoginRegister}) => {
   }
 
   return (
-    <div>
-      <div className="py-32 bg-blue-200 w-[100%] h-[100%]">
+    <div className=''>
+      <div className="bg-blue-200 overflow-y-hidden flex justify-center items-center">
       <ToastContainer
         position="top-right"
         autoClose={5000}
@@ -82,7 +82,7 @@ const page = ({setLoginRegister}) => {
         pauseOnHover
         theme="dark"
       />
-      <div className="flex justify-center text-center">
+      <div className="flex justify-center text-center h-[100vh] items-center">
         <div className="border-[2px] border-black rounded-lg mx-20 my-4 py-7 px-10">
           <form>
             <div className="">
